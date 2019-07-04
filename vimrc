@@ -6,37 +6,24 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
-" Vim fugitive
 Plugin 'tpope/vim-fugitive'
-
-" Vim airline
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-
-" NerdTree
 Plugin 'scrooloose/nerdtree'
-
-" Prettier
 Plugin 'prettier/vim-prettier'
-
-" Gruvbox Plugin
 Plugin 'morhetz/gruvbox'
-
-" Multiple cursors
-" Plugin 'terryma/vim-multiple-cursors'
-
-" Surround
 Plugin 'tpope/vim-surround'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-" Put your non-Plugin stuff after this line
+Plugin 'mileszs/ack.vim'
+Plugin 'tpope/vim-commentary'
+Plugin 'groenewege/vim-less'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+call vundle#end()
+filetype plugin indent on
 
 " Map Leader
 let mapleader = ","
@@ -50,19 +37,12 @@ syntax enable
 
 " Show numbers
 set number
-
 set showmode
-
 set wildmenu
-
 set ruler
-
 set autoindent
-
 set showmatch
-
 set spelllang=en_us
-
 set tabstop=8
 set shiftwidth=4
 set shiftround
@@ -75,6 +55,7 @@ set noswapfile
 " Show status line
 set laststatus=2
 let g:airline_powerline_fonts = 1
+let g:airline_theme = 'powerlineish'
 set ttimeoutlen=50
 let g:airline#extensions#tabline#enabled = 1
 
@@ -92,7 +73,7 @@ map <leader>nf :NERDTreeFind<cr>
 " => Terminal
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>w :w<cr>
-map <leader>z ZZ<cr>
+" map <leader>z ZZ<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
@@ -113,7 +94,9 @@ map <C-l> <C-W>l
 " Close the current buffer
 map <leader>bd :Bclose<cr>:tabclose<cr>gT
 
-" Useful mappings for managing tabs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Moving around, tabs, windows and buffers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
@@ -121,8 +104,33 @@ map <leader>tm :tabmove
 map <leader>t<leader> :tabnext
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Moving around, tabs, windows and buffers
+" => Prettier
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd FileType javascript set formatprg=prettier\ --stdin
 map <leader>p :Prettier<cr>
+autocmd FileType javascript set formatprg=prettier\ --stdin
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Ack
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>ac :Ack 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Git fugitive
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>gw :Gwrite<cr>
+nnoremap <leader>ga :Gadd<cr>
+nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gci :Gcommit<cr>
+nnoremap <leader>ge :Gedit<cr>
+nnoremap <leader>gm :Gmove
+nnoremap <leader>gr :Gread<cr>
+nnoremap <leader>grm :Gremove<cr>
+nnoremap <leader>gp :Git push
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => GitGutter
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:gitgutter_terminal_reports_focus=0
+set updatetime=100
