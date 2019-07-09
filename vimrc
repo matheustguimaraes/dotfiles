@@ -4,8 +4,6 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline'
@@ -22,6 +20,11 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
+Plugin 'michalliu/jsruntime.vim'
+Plugin 'michalliu/jsoncodecs.vim'
+Plugin 'michalliu/sourcebeautify.vim'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'nikvdp/ejs-syntax'
 call vundle#end()
 filetype plugin indent on
 
@@ -39,6 +42,7 @@ syntax enable
 set number
 set showmode
 set wildmenu
+set relativenumber
 set ruler
 set autoindent
 set showmatch
@@ -47,6 +51,7 @@ set tabstop=8
 set shiftwidth=4
 set shiftround
 set autoindent
+set path+=**
 
 " Disable backup and swap files
 set nobackup
@@ -62,7 +67,7 @@ let g:airline#extensions#tabline#enabled = 1
 set t_Co=256
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Nerd Tree
+" Nerd Tree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:NERDTreeWinPos = "right"
 map <leader>nn :NERDTreeToggle<cr>
@@ -70,13 +75,14 @@ map <leader>nb :NERDTreeFromBookmark<Space>
 map <leader>nf :NERDTreeFind<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Terminal
+" Terminal
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>w :w<cr>
+map <leader>w :w!<cr>
+map <leader>qq :q!<cr>
 " map <leader>z ZZ<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Moving around, tabs, windows and buffers
+" Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
 map <space> /
@@ -95,7 +101,7 @@ map <C-l> <C-W>l
 map <leader>bd :Bclose<cr>:tabclose<cr>gT
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Moving around, tabs, windows and buffers
+" Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
@@ -104,18 +110,18 @@ map <leader>tm :tabmove
 map <leader>t<leader> :tabnext
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Prettier
+" Prettier
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>p :Prettier<cr>
+map <leader>pr :Prettier<cr>
 autocmd FileType javascript set formatprg=prettier\ --stdin
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Ack
+" Ack
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>ac :Ack 
+map <leader>ac :Ack<Space>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Git fugitive
+" Git fugitive
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gs :Gstatus<cr>
@@ -127,10 +133,39 @@ nnoremap <leader>ge :Gedit<cr>
 nnoremap <leader>gm :Gmove
 nnoremap <leader>gr :Gread<cr>
 nnoremap <leader>grm :Gremove<cr>
-nnoremap <leader>gp :Git push
+nnoremap <leader>gp :Git push<Space>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => GitGutter
+" GitGutter
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:gitgutter_terminal_reports_focus=0
 set updatetime=100
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Syntastic
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+" let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Jumps
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>jj 30j<cr>
+map <leader>kk 30k<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Ignore in autocomplete with ctags
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set wildignore+=**/node_modules/**
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Snipmate
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:snipMate = get(g:, 'snipMate', {}) " Allow for vimrc re-sourcing
+let g:snipMate.scope_aliases = {}
+let g:snipMate.scope_aliases['ejs'] = 'html, javascript'
