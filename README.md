@@ -1,2 +1,2 @@
-# vimfiles
-[matheustguimaraes](https://github.com/matheustguimaraes) vim files
+# dotfiles
+[matheustguimaraes](https://github.com/matheustguimaraes) dotfiles
