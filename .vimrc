@@ -1,5 +1,5 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible " be iMproved, required
+filetype off " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -9,7 +9,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'
-Plugin 'prettier/vim-prettier'
 Plugin 'morhetz/gruvbox'
 Plugin 'tpope/vim-surround'
 Plugin 'mileszs/ack.vim'
@@ -20,70 +19,66 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
-Plugin 'michalliu/jsruntime.vim'
-Plugin 'michalliu/jsoncodecs.vim'
-Plugin 'michalliu/sourcebeautify.vim'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'nikvdp/ejs-syntax'
 call vundle#end()
+
 filetype plugin indent on
 
-" Map Leader
-let mapleader = ","
+let mapleader = "," " map leader
 
 " Theme
 let g:gruvbox_italic=1
 colorscheme gruvbox
 set background=dark
 
-syntax enable
+syntax enable " syntax highlighting
 
-" Show numbers
+set title
+set ruler
 set number
+set path+=**
 set showmode
 set wildmenu
-set relativenumber
-set ruler
+set autoread
+set t_Co=256 " assume environment can use 256 colors
+set nobackup " Disable backup and swap files
 set autoindent
-set showmatch
-set spelllang=en_us
-set tabstop=8
-set shiftwidth=4
+set noswapfile
 set shiftround
 set autoindent
-set path+=**
+set backspace=2 " make backspace work like most other programs
+set statusline=2
+set colorcolumn=90 " set colorcolumn at right margin
+set relativenumber
+set ttimeoutlen=50
+set spelllang=en_us " spell english language
 
-" Disable backup and swap files
-set nobackup
-set noswapfile
+" How Tab behaves
+set tabstop=4 " number of spaces used as tab for
+set softtabstop=4 " number of spaces used as tab for editing
+set shiftwidth=4 " number of spaces used to autoindent
+set expandtab " expand tabs into spaces
+set smarttab " smart tabulation and backspace
 
-" Show status line
-set laststatus=2
+" How IO behave
+set ttyfast " assume the terminal is fast
+set mouse=a " enable mouse in all modes
+
+" Airline font, theme, etc
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'powerlineish'
-set ttimeoutlen=50
 let g:airline#extensions#tabline#enabled = 1
 
-set t_Co=256
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Nerd Tree
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:NERDTreeWinPos = "right"
 map <leader>nn :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark<Space>
 map <leader>nf :NERDTreeFind<cr>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Terminal
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>w :w!<cr>
 map <leader>qq :q!<cr>
-" map <leader>z ZZ<cr>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Moving around, tabs, windows and buffers
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
 map <space> /
 map <c-space> ?
@@ -100,29 +95,21 @@ map <C-l> <C-W>l
 " Close the current buffer
 map <leader>bd :Bclose<cr>:tabclose<cr>gT
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Moving around, tabs, windows and buffers
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove
 map <leader>t<leader> :tabnext
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Prettier
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>pr :Prettier<cr>
-autocmd FileType javascript set formatprg=prettier\ --stdin
+" map <leader>pr :Prettier<cr>
+" autocmd FileType javascript set formatprg=prettier\ --stdin
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ack
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>ac :Ack<Space>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Git fugitive
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gw :Gwrite<cr>
@@ -135,37 +122,22 @@ nnoremap <leader>gr :Gread<cr>
 nnoremap <leader>grm :Gremove<cr>
 nnoremap <leader>gp :Git push<Space>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GitGutter
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:gitgutter_terminal_reports_focus=0
 set updatetime=100
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Syntastic
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-" let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Jumps
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <leader>jj 30j<cr>
 map <leader>kk 30k<cr>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ignore in autocomplete with ctags
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set wildignore+=**/node_modules/**
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Snipmate
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:snipMate = get(g:, 'snipMate', {}) " Allow for vimrc re-sourcing
-let g:snipMate.scope_aliases = {}
-let g:snipMate.scope_aliases['ejs'] = 'html, javascript'
+" Autoclose
+" inoremap " ""<left>
+" inoremap ' ''<left>
+" inoremap ( ()<left>
+" inoremap [ []<left>
+" inoremap { {}<left>
+" inoremap {<CR> {<CR>}<ESC>O
+" inoremap {;<CR> {<CR>};<ESC>O
