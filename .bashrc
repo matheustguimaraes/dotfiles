@@ -125,7 +125,7 @@ export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/github
 source /usr/local/bin/virtualenvwrapper.sh
 
-# Export MySQL path
+# Export Microsoft SQL Server path
 export PATH="$PATH:/opt/mssql-tools/bin"
 
 # Update package lists
