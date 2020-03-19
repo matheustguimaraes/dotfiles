@@ -134,11 +134,10 @@ alias upup='sudo apt-get update'
 # Fetch new versions of packages
 alias upupr='sudo apt-get update'
 
-# Manage SQL services
+# Manage Microsoft SQL Server services
 alias startsql='sudo systemctl start mssql-server'
 alias stopsql='sudo systemctl stop mssql-server'
 
 # Manage TeamViewer daemon
 alias startteamviewer="sudo teamviewer --daemon start"
 alias stopteamviewer="sudo teamviewer --daemon stop"
-
